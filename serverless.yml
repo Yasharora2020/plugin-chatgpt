@@ -1,0 +1,39 @@
+service: chatgpt
+frameworkVersion: '3'
+provider:
+  name: aws
+  runtime: python3.8
+  stage: dev
+  region: ap-southeast-2
+  profile: macbook
+
+plugins:
+  - serverless-python-requirements
+  - serverless-iam-roles-per-function
+
+custom:
+  pythonRequirements:
+    dockerizePip: true
+    pythonBin: python3
+    requirementsPath: requirements.txt
+    #dockerImage: lambci/lambda:build-python3.8
+
+
+functions:
+  chatGpt1:
+    handler: handler.chatGpt1
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - secretsmanager:GetSecretValue
+        Resource: arn:aws:secretsmanager:ap-southeast-2:${AWS::AccountId}:secret:dev/openai/api-jQ4UpB
+    events:
+      - http:
+          path: /question
+          method: post
+          integration: lambda
+          request:
+            template:
+              application/json: '{ "input_text": "$input.path(''$.input_text'')" }'
+    timeout: 20
+
