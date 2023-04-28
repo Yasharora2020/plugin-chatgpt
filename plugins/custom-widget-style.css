@@ -1,0 +1,46 @@
+.custom-widget-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+#custom-widget-input {
+    display: block;
+    flex: 2; /* Add this line to set the width of the input field */
+    /* Add any additional styling properties for the input element as needed */
+}
+
+#custom-widget-submit {
+    text-align: center;
+    width: 100px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px; /* Add this line to create space between the input and the button */
+}
+
+#custom-widget-submit:hover {
+    background-color: #0069d9;
+}
+
+#custom-widget-loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    border-top-color: #000;
+    animation: spin 1s linear infinite;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+.hidden {
+    display: none;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
